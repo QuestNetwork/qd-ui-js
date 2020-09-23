@@ -4,8 +4,10 @@ import { Subject } from 'rxjs';
 export class UiService {
 
   constructor() {
-
-
+    let uVar;
+    this.bee = uVar;
+    this.toTabIndexSub = new Subject();
+     this.handledMessages = [];
   }
 
   async start(config){
@@ -43,6 +45,20 @@ export class UiService {
     let sb = this.getSideBarVisible();
     sb[side] = false;
     this.setSideBarVisible(sb);
+  }
+
+  toTabIndex(value){
+    this.toTabIndexSub.next(value);
+  }
+  onTabChange(){
+    return this.toTabIndexSub;
+  }
+
+  getHandledMessages(){
+    return this.handledMessages;
+  }
+  addHandledMessage(id){
+      this.handledMessages.push(id);
   }
 
 
