@@ -20,6 +20,19 @@ export class UiService {
     return true;
   }
 
+
+  _snack = {};
+  snackBar = new Subject<any>();
+  public showSnack(left, right, object = {}){
+    this._snack = {left, right, object};
+    this.snackBar.next(this._snack);
+  }
+  snackBarDismissedSub = new Subject<any>();
+  public snackBarDismiss(){
+    this.snackBarDismissedSub.next(true);
+  }
+
+
   setSideBarFixed(sideBarFixed){
       this.bee.config.setSideBarFixed(sideBarFixed);
   }
