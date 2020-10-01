@@ -8,6 +8,12 @@ export class UiService {
     this.bee = uVar;
     this.toTabIndexSub = new Subject();
      this.handledMessages = [];
+
+
+       this._snack = {};
+       this.snackBar = new Subject<any>();
+       this.snackBarDismissedSub = new Subject<any>();
+
   }
 
   async start(config){
@@ -21,13 +27,10 @@ export class UiService {
   }
 
 
-  _snack = {};
-  snackBar = new Subject<any>();
   public showSnack(left, right, object = {}){
     this._snack = {left, right, object};
     this.snackBar.next(this._snack);
   }
-  snackBarDismissedSub = new Subject<any>();
   public snackBarDismiss(){
     this.snackBarDismissedSub.next(true);
   }
