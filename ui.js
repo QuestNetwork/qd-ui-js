@@ -11,8 +11,8 @@ export class UiService {
 
 
        this._snack = {};
-       this.snackBar = new Subject<any>();
-       this.snackBarDismissedSub = new Subject<any>();
+       this.snackBar = new Subject();
+       this.snackBarDismissedSub = new Subject();
 
   }
 
