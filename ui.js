@@ -27,11 +27,11 @@ export class UiService {
   }
 
 
-  public showSnack(left, right, object = {}){
+   showSnack(left, right, object = {}){
     this._snack = {left, right, object};
     this.snackBar.next(this._snack);
   }
-  public snackBarDismiss(){
+   snackBarDismiss(){
     this.snackBarDismissedSub.next(true);
   }
 
