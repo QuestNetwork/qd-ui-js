@@ -8,6 +8,12 @@ export class UiService {
     this.bee = uVar;
     this.toTabIndexSub = new Subject();
      this.handledMessages = [];
+
+
+       this._snack = {};
+       this.snackBar = new Subject();
+       this.snackBarDismissedSub = new Subject();
+
   }
 
   async start(config){
@@ -17,16 +23,18 @@ export class UiService {
     this.electron = config['dependencies']['electronService'];
     this.bee = config['dependencies']['bee'];
 
-    var userAgent = navigator.userAgent.toLowerCase();
-    if (userAgent.indexOf(' electron/') > -1) {
-      this.isElectron = true;
-      this.fs = this.electron.remote.require('fs');
-      this.configPath = this.electron.remote.app.getPath('userData');
-      this.configFilePath = this.configPath + "/user.qcprofile";
-    }
-
     return true;
   }
+
+
+   showSnack(left, right, object = {}){
+    this._snack = {left, right, object};
+    this.snackBar.next(this._snack);
+  }
+   snackBarDismiss(){
+    this.snackBarDismissedSub.next(true);
+  }
+
 
   setSideBarFixed(sideBarFixed){
       this.bee.config.setSideBarFixed(sideBarFixed);
